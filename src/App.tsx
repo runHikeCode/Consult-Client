@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { ProtectedRoute } from "./routes/ProtectedRoute";
+import Nav from "./components/Nav/Nav"
+import Main from "./pages/Main";
+// import Therapist from "./pages/Therapist";
+import Patient from "./pages/Patient";
+import Session from "./pages/Session";
+import Dashboard from "./pages//Dashboard";
+import User from "./pages/User";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Nav/>
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+
+        {/* <Route path="/therapist" element={<ProtectedRoute />}>
+          <Route path="/therapist" element={<Therapist />}></Route>
+        </Route> */}
+        
+        <Route path="/user" element={<ProtectedRoute />}>
+          <Route path="/user" element={<User />}></Route>
+        </Route>
+
+        <Route path="/patient/:id" element={<ProtectedRoute />}>
+          <Route path="/patient/:id" element={<Patient />}></Route>
+        </Route>
+        
+        <Route path="/session" element={<ProtectedRoute />}>
+          <Route path="/session" element={<Session />}></Route>
+        </Route>
+
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
